@@ -8,6 +8,7 @@ export async function GET(request: Request) {
     const search = searchParams.get('search')?.toLowerCase() || '';
     const qualification = searchParams.get('qualification')?.toLowerCase() || '';
     const region = searchParams.get('region')?.toLowerCase() || '';
+    const sort = searchParams.get('sort') || 'none';
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '10');
 
@@ -45,6 +46,12 @@ export async function GET(request: Request) {
       filteredData = filteredData.filter((post: any) =>
         post.regionId.toLowerCase().includes(region)
       );
+    }
+
+    if (sort === 'high-to-low') {
+      filteredData = filteredData.sort((a: any, b: any) => b.vacancy.TOTAL - a.vacancy.TOTAL);
+    } else if (sort === 'low-to-high') {
+      filteredData = filteredData.sort((a: any, b: any) => a.vacancy.TOTAL - b.vacancy.TOTAL);
     }
 
     const startIndex = (page - 1) * limit;

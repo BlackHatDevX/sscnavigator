@@ -41,6 +41,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [qualificationFilter, setQualificationFilter] = useState('');
   const [regionFilter, setRegionFilter] = useState('');
+  const [vacancySort, setVacancySort] = useState<'none' | 'high-to-low' | 'low-to-high'>('none');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -100,6 +101,7 @@ export default function Home() {
       if (searchTerm) params.append('search', searchTerm);
       if (qualificationFilter) params.append('qualification', qualificationFilter);
       if (regionFilter) params.append('region', regionFilter);
+      if (vacancySort !== 'none') params.append('sort', vacancySort);
 
       const response = await fetch(`/api/posts?${params.toString()}`);
       const data: PostsResponse = await response.json();
@@ -140,7 +142,7 @@ export default function Home() {
   useEffect(() => {
     setCurrentPage(1);
     fetchPosts(1);
-  }, [searchTerm, qualificationFilter, regionFilter]);
+  }, [searchTerm, qualificationFilter, regionFilter, vacancySort]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -155,7 +157,7 @@ export default function Home() {
     );
   }
 
-  const regions = ['Central Region', 'Eastern Region', 'Western Region', 'Northern Region', 'Southern Region', 'North Eastern Region'];
+  const regions = ['Central Region', 'Eastern Region', 'Western Region', 'Northern Region', 'Southern Region', 'North Eastern Region', 'Karnataka Kerala Region', 'Madhya Pradesh Region', 'North Western Region'];
 
   return (
     <div className="min-h-screen font-sans relative">
@@ -336,7 +338,7 @@ export default function Home() {
           <h2 className="text-xl font-semibold text-zinc-900 dark:text-white mb-6">
             Filter Posts
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
             <div>
               <label className="block text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-2">
                 Search (Post Name / Requirements)
@@ -376,6 +378,20 @@ export default function Home() {
                     {region}
                   </option>
                 ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-2">
+                Sort by Vacancy
+              </label>
+              <select
+                value={vacancySort}
+                onChange={(e) => setVacancySort(e.target.value as 'none' | 'high-to-low' | 'low-to-high')}
+                className="w-full px-4 py-3 border border-black/10 dark:border-white/10 rounded-xl bg-white/50 dark:bg-black/50 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all"
+              >
+                <option value="none">No Sort</option>
+                <option value="high-to-low">High to Low</option>
+                <option value="low-to-high">Low to High</option>
               </select>
             </div>
           </div>
