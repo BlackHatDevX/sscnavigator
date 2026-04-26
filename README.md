@@ -2,7 +2,7 @@
 
 <div align="center">
 
-A beautifully designed, modern web application to search and filter SSC Phase 14 post vacancies with an Apple-inspired UI.
+A beautifully designed, modern web application to search and filter SSC Phase 14 post vacancies.
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge&logo=vercel)](https://sscnavigator.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
