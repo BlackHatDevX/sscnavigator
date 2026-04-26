@@ -13,6 +13,12 @@ A beautifully designed, modern web application to search and filter SSC Phase 14
 </div>
 
 ---
+## Preview
+
+<img width="1566" height="952" alt="Screenshot 2026-04-26 at 9 35 49 AM" src="https://github.com/user-attachments/assets/c58f153c-da61-4dc5-a78f-f9d4e4a414e5" />
+
+
+---
 
 ## Features
 
